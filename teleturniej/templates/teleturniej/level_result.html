@@ -1,0 +1,6 @@
+{% csrf_token %}
+<p>{{message}}</p>
+<p>{{nick}}</p>
+<form action="game" method="post">{% csrf_token %}
+    <input type="submit" name=1 value='Przejdz do kolejnego pytania!' />
+</form>

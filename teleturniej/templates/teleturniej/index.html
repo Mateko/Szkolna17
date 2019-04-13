@@ -1,6 +1,5 @@
-
-<h1>Wpisz swój nick</h1>
-<form action="/nick" method="post">
-  <input id="nick" type="text" name="nick" value="{{ current_name }}">
-  <input type="submit" value="OK">
+<form action="" method="post">
+  {% csrf_token %}
+  {{ form }}
+  <input type="submit" value="Submit" />
 </form>

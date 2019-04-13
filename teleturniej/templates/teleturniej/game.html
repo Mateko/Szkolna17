@@ -1,0 +1,11 @@
+<h1>Witaj!</h1>
+{% csrf_token %}
+<p>{{nick}}</p>
+<p>{{question}}</p>
+{{form}}
+<form action="level_result" method="post">{% csrf_token %}
+    <input type="submit" name='answer' value={{first_answer}} />
+    <input type="submit" name='answer' value={{second_answer}} />
+    <input type="submit" name='answer' value={{third_answer}} />
+    <input type="submit" name='answer' value={{four_answer}} />
+</form>

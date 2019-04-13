@@ -1,4 +1,8 @@
 from django import forms
 
-class NameForm(forms.Form):
-    your_name = forms.CharField(label='Twoj_nick', max_length=10)
+class NickForm(forms.Form):
+    your_name = forms.CharField(label='nick', max_length=100)
+
+class Answer(forms.Form):
+    answer =  forms.CharField(label='answer')   
+

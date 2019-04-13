@@ -1,8 +1,8 @@
 from django.contrib import admin
 
-from .models import Question, Answers, CorrectAnswer
+from .models import Question, Answers
 # Register your models here.
 
-admin.site.register([Question, Answers, CorrectAnswer])
+admin.site.register([Question, Answers])
 
 
