@@ -1,11 +1,91 @@
-<h1>Witaj!</h1>
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/game.css' %}">
 {% csrf_token %}
-<p>{{nick}}</p>
-<p>{{question}}</p>
-{{form}}
-<form action="level_result" method="post">{% csrf_token %}
-    <input type="submit" name='answer' value={{first_answer}} />
-    <input type="submit" name='answer' value={{second_answer}} />
-    <input type="submit" name='answer' value={{third_answer}} />
-    <input type="submit" name='answer' value={{four_answer}} />
-</form>
+<p class='nick'>Powodzenia {{nick}}!</p>
+<!--<p>Na ten moment wygrałeś następującą ilość nitra: {{level}}</p>-->
+{% load staticfiles %}
+<div class="gameContainer">
+    <div class="game">
+        <img src="{% static question.image.url %}" alt="Brak zdjęcia" class="questionImage">
+        {{form}}
+        <h3 class='question'>{{question}}</h3>
+        <form action="level_result" method="post">{% csrf_token %}
+            <input type="submit" name='answer' value={{first_answer}} class="answers"/>
+            <input type="submit" name='answer' value={{second_answer}} class="answers"/>
+            <input type="submit" name='answer' value={{third_answer}} class="answers"/>
+            <input type="submit" name='answer' value={{four_answer}} class="answers"/>
+        </form>
+        </div>
+    <div class="winnings">
+        <h2>Koła ratunkowe:</h2>
+        <audio id="bflat" src="{% static 'teleturniej/pierdol_sie_kurwa.mp3' %}"></audio>
+        <input type="submit" name='answer' value="Zapytaj Chat" class="lifePreserverButton "/>
+        <input type="submit" name='answer' value="50/50" class="lifePreserverButton "/>
+        <input type="submit" name='answer' value="Zadzwon do majora" class="lifePreserverButton" onclick="document.getElementById('bflat').play()"><a href="{% static 'teleturniej/pierdol_sie_kurwa.mp3' %}"></a></input>
+
+        <h2>Obecnie grasz o:</h2>
+        {%if level == 12%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 1 000 000 &#127868; Nitro!</h3>
+        {% else %}
+            <h3>1 000 000 &#127868; Nitro!</h3>
+        {% endif %}
+        {%if level == 11%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 500 000 &#127868; Nitro!</h3>
+        {% else %}
+            <h3>500 000 &#127868; Nitro!</h3>
+        {% endif %}
+        {%if level == 10%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 250 000 &#127868; Nitro!</h3>
+        {% else %}
+            <h3>250 000 &#127868; Nitro!</h3>
+        {% endif %}
+        {%if level == 9%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 125 000 &#127868; Nitro!</h3>
+        {% else %}
+            <h3>125 000 &#127868; Nitro!</h3>
+        {% endif %}
+        {%if level == 8%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 64 000 &#127868; Nitro!</h3>
+        {% else %}
+            <h3>64 000 &#127868; Nitro!</h3>
+        {% endif %}
+        {%if level == 7%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 16 000 &#127868;Nitro!</h3>
+        {% else %}
+            <h3>16 000 &#127868;Nitro!</h3>
+        {% endif %}
+        {%if level == 6%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 8000 &#127868; Nitro!</h3>
+        {% else %}
+            <h3>8000 &#127868; Nitro!</h3>
+        {% endif %}
+        {%if level == 5%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 2000 &#127868; Nitro!</h3>
+        {% else %}
+            <h3>2000 &#127868; Nitro!</h3>
+        {% endif %}
+        {%if level == 4%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 1000 &#127868; Nitro!</h3>
+        {% else %}
+            <h3>1000 &#127868; Nitro!</h3>
+        {% endif %}
+        {%if level == 3%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 500 &#127868; Nitro!</h3>
+        {% else %}
+            <h3>500 &#127868; Nitro!</h3>
+        {% endif %}
+        {%if level == 2%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 200 &#127868; Nitro!</h3>
+        {% else %}
+            <h3>200 &#127868; Nitro!</h3>
+        {% endif %}
+        {%if level == 1%}
+            <h3 style ="font-size: 34px; margin-left: -30px;">&#128073; 100 &#127868; Nitro!</h3>
+        {% else %}
+            <h3>100 &#127868; Nitro!</h3>
+        {% endif %}
+    </div>
+</div>
+

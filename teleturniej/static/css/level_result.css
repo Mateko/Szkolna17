@@ -1,0 +1,31 @@
+    .win {
+        background-image: url("/static/css/major.jpg");
+        background-color: #cccccc;
+        background-repeat: no-repeat;
+        background-size: cover;
+   
+   }
+
+   .lose {
+        background-image: url("/static/css/sad.jpg");
+        background-color: #cccccc;
+        background-repeat: no-repeat;
+        background-size: cover;
+   }
+   
+   .header {
+       position: absolute;
+       color: #FF8C00;
+       text-shadow: 1px 1px 2px black;     
+       top: 32%;
+       left: 50%;                         
+       transform: translate(-50%, -32%)
+   }
+   
+   .form {
+       position: absolute;               
+       top: 40%;   
+       left: 50%;                     
+       transform: translate(-50%, -40%)
+   }
+   

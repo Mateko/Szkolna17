@@ -1,6 +1,52 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+{% load staticfiles %}
+<link rel="stylesheet" href="{% static 'css/level_result.css' %}">
 {% csrf_token %}
-<p>{{message}}</p>
-<p>{{nick}}</p>
-<form action="game" method="post">{% csrf_token %}
-    <input type="submit" name=1 value='Przejdz do kolejnego pytania!' />
-</form>
+{% if game_end == None %}
+<body class="win">
+    <h1 class="header">Gratulacje: {{nick}}, przechodzisz na kolejny level! &#127868;</h1>
+    <form action="game" method="post" class="form">{% csrf_token %}
+        <input type="submit" name=1 value='Przejdz do kolejnego pytania!' />
+    </form>
+</body>
+{% else %}
+<body class="lose">
+    {% if level == 1%}
+    <h1 class="header">Niestety: {{nick}}, dziś nie poniuchasz z majorkiem </h1>
+    {% endif %}
+    {% if level == 2%}
+    <h1 class="header">Niestety: {{nick}},  zdobyłeś nitra: 200</h1>
+    {% endif %}
+    {% if level == 3%}
+    <h1 class="header">Niestety: {{nick}}, zdobyłeś nitra: 500</h1>
+    {% endif %}
+    {% if level == 4%}
+    <h1 class="header">Niestety: {{nick}},zdobyłeś nitra: 1000</h1>
+    {% endif %}
+    {% if level == 5%}
+    <h1 class="header">Niestety: {{nick}}, zdobyłeś nitra: 2000</h1>
+    {% endif %}
+    {% if level == 6%}
+    <h1 class="header">Niestety: {{nick}}, zdobyłeś nitra: 8000</h1>
+    {% endif %}
+    {% if level == 7%}
+    <h1 class="header">Niestety: {{nick}}, zdobyłeś nitra: 16 000</h1>
+    {% endif %}
+    {% if level == 8%}
+    <h1 class="header">Niestety: {{nick}}, zdobyłeś nitra: 64 000</h1>
+    {% endif %}
+    {% if level == 9%}
+    <h1 class="header">Niestety: {{nick}}, zdobyłeś nitra: 125 000</h1>
+    {% endif %}
+    {% if level == 10%}
+    <h1 class="header">Niestety: {{nick}}, zdobyłeś nitra: 250 000</h1>
+    {% endif %}
+    {% if level == 11%}
+    <h1 class="header">Niestety: {{nick}}, zdobyłeś nitra: 500 000</h1>
+    {% endif %}
+    <form action="/teleturniej/" class="form">{% csrf_token %}
+        <input type="submit" value='Zagraj jeszcze raz!' />
+    </form>
+<body>
+{% endif %}

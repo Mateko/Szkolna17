@@ -19,8 +19,9 @@ class Question(models.Model):
         (12, 'dwunasty_poziom'),
     )
 
-    question = models.CharField(max_length=30)
+    question = models.CharField(max_length=64)
     level = models.IntegerField(choices=LEVELS)
+    image = models.ImageField(upload_to='teleturniej/')
 
     def __str__(self):
         return self.question

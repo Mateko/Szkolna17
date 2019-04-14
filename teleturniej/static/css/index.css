@@ -1,0 +1,22 @@
+body {
+ background-image: url("/static/css/into.jpeg");
+ background-color: #cccccc;
+ background-repeat: no-repeat;
+ background-size: cover;
+
+}
+
+.header {
+    position: absolute;
+    color: white;               
+    top: 32%;
+    left: 50%;                         
+    transform: translate(-50%, -32%)
+}
+
+.form {
+    position: absolute;               
+    top: 40%;   
+    left: 50%;                     
+    transform: translate(-50%, -40%)
+}

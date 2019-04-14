@@ -22,6 +22,9 @@ def get_name(request):
             nick = form.cleaned_data['your_name']
             request.session['nick'] = nick
             request.session['level'] = 1
+            request.session['call_major'] = 1
+            request.session['fifty_fifty'] = 1
+            request.session['ask_chat'] = 1
             return HttpResponseRedirect('game')
 
     # if a GET (or any other method) we'll create a blank form
@@ -34,29 +37,40 @@ def get_name(request):
 def game(request):
     nick = request.session.get('nick')
     level = request.session.get('level')
-      
-    if (level == 1):
-        try:
-            random_dimension = level * 5
-            available_questions = random.randint(random_dimension - 5, random_dimension)      
-            question = get_object_or_404(q, pk=available_questions)
-            selected_question = q.objects.get(pk=available_questions)
-            available_answers = a.objects.filter(question=available_questions)
-            
-        except (KeyError, q.DoesNotExist):
-            return render(request, 'teleturniej/game.html', {
-                'question': question,
-                'error_message': 'Nie ma takiego pytania',
-            })
 
-        else:
+    if request.method == 'POST':
+        # create a form instance and populate it with data from the request:
+        form = NickForm(request.POST)
+        # check whether it's valid:
+        if form.is_valid():
+            nick = form.cleaned_data['your_name']
+            request.session['nick'] = nick
+            request.session['level'] = 1
+            return HttpResponseRedirect('game')
 
-            return render(request, 'teleturniej/game.html', {
-                'nick': nick, 'question': selected_question, 'first_answer': available_answers.first(), 
-                'second_answer':  available_answers[1], 'third_answer': available_answers[2], 
-                'four_answer': available_answers[3]
-            })
+    # if a GET (or any other method) we'll create a blank form
+    else:
+        form = NickForm()
 
+    try:
+        random_dimension = level * 4
+        available_questions = random.randint(random_dimension -3, random_dimension)      
+        question = get_object_or_404(q, pk=available_questions)
+        selected_question = q.objects.get(pk=available_questions)
+        available_answers = a.objects.filter(question=available_questions)
+    except (KeyError, q.DoesNotExist):
+        return render(request, 'teleturniej/game.html', {
+            'question': question,
+            'error_message': 'Nie ma takiego pytania',
+        })
+
+    else:
+        print(selected_question)
+        return render(request, 'teleturniej/game.html', {
+            'nick': nick, 'question': selected_question, 'first_answer': available_answers.first(), 
+            'second_answer':  available_answers[1], 'third_answer': available_answers[2], 
+            'four_answer': available_answers[3], 'level': level            
+        })
 
 def level_result(request):
     nick = request.session.get('nick')
@@ -71,9 +85,17 @@ def level_result(request):
             check_answer = a.objects.filter(answer=current_answer, is_correct_answer=1)
             
             if (check_answer.first() != None):
+                request.session['level'] += 1
                 return render(request, 'teleturniej/level_result.html', {'nick': nick})   
             else:
-                return render(request, 'teleturniej/end_game.html', {'nick':nick, 'level':level})
+                request.session['level'] = 1
+                return render(request, 'teleturniej/level_result.html', {'nick':nick, 'level':level, 'game_end':'Niestety, to koniec twojej przygody!'})
 
         else:
             form = Answer()
+
+        return render(request, 'teleturniej/index.html', {'form': form})
+
+    if request.method == 'DELETE':
+        print('a')
+        return render(request, 'teleturniej/index.html', {'form': form})
