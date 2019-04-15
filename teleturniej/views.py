@@ -23,9 +23,9 @@ def get_name(request):
             nick = form.cleaned_data['your_name']
             request.session['nick'] = nick
             request.session['level'] = 1
-            request.session['Zapytaj Chat'] = 1
-            request.session['50/50'] = 1
-            request.session['Zadzwon do majora'] = 1
+            request.session['call_chat'] = 1
+            request.session['fifty_fifty'] = 1
+            request.session['call_major'] = 1
             return HttpResponseRedirect('game')
 
     # if a GET (or any other method) we'll create a blank form
@@ -38,9 +38,9 @@ def get_name(request):
 def game(request):
     nick = request.session.get('nick')
     level = request.session.get('level')
-    ask_chat = request.session.get('Zapytaj Chat')
-    fifty_fifty = request.session.get('50/50')
-    call_major = request.session.get('Zadzwon do majora')
+    ask_chat = request.session.get('call_chat')
+    fifty_fifty = request.session.get('fifty_fifty')
+    call_major = request.session.get('call_major')
             
     try:
         random_dimension = level * 4
