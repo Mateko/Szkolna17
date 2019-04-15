@@ -6,3 +6,6 @@ class NickForm(forms.Form):
 class Answer(forms.Form):
     answer = forms.CharField(label='')   
 
+class LifePreserver(forms.Form):
+    life_preserver = forms.CharField(label='')   
+
