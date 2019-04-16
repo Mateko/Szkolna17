@@ -8,22 +8,55 @@
     $( function() {
         $('#lifePreserver').submit(function(e){
             e.preventDefault();
-            life_preserver = $(this).find("input[type=submit]:focus" ).attr('id')
-            life_preserver_value(life_preserver);    
+            lifePreserver = $(this).find("input[type=submit]:focus" ).attr('id')
+            lifePreserverValue(lifePreserver);    
         });
 
-        function life_preserver_value(life_preserver) {
+        function lifePreserverValue(lifePreserver) {
             $.ajax({
                 url : "life_preserver/",
                 type: "POST",
-                data : {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value, life_preserver: life_preserver},
+                data : {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value, lifePreserver: lifePreserver},
                 dataType : "json"
             });
-            id = '#' + life_preserver
+            id = '#' + lifePreserver
             if (id == '#call_major') {
-                    document.getElementById('major_pierdol_sie').play()
-                    $(id).css("pointer-events","none");
-                    $(id).css("background","#DC143C");
+                document.getElementById('major_pierdol_sie').play()
+                $(id).css("pointer-events","none");
+                $(id).css("background","#DC143C");
+
+            } else if (id == '#fifty_fifty') {
+                $(id).css("pointer-events","none");
+                $(id).css("background","#DC143C");
+                const correctAnswer = "{{ correct_answer }}"
+                const answerOne = $('#answer1').attr('value')
+                const answerTwo = $('#answer2').attr('value')
+                const answerThree = $('#answer3').attr('value')
+                const answerFour = $('#answer4').attr('value')
+                const listOfAnswer = [answerOne, answerTwo, answerThree, answerFour]                                
+                indexOfCorrectAnswer = listOfAnswer.indexOf(correctAnswer)
+
+                if(indexOfCorrectAnswer != -1) {
+	                listOfAnswer.splice(indexOfCorrectAnswer, 1);
+                    listOfAnswer.splice(1,1);
+                }
+
+                for( x in listOfAnswer) {
+                    if(listOfAnswer[x] === answerOne) {
+                        $('#answer1').css("pointer-events","none");
+                        $('#answer1').val('')
+                    } else if (listOfAnswer[x] === answerTwo) {
+                        $('#answer2').css("pointer-events","none");
+                        $('#answer2').val('')
+                    } else if (listOfAnswer[x] === answerThree) {
+                        $('#answer3').css("pointer-events","none");
+                        $('#answer3').val('')
+                    } else if (listOfAnswer[x] === answerFour) {
+                        $('#answer4').css("pointer-events","none");
+                        $('#answer4').val('')
+                    }
+                }
+
             } else {
                 $(id).css("pointer-events","none");
                 $(id).css("background","#DC143C");
@@ -42,10 +75,10 @@
         {{ form }}
         <h3 class='question'>{{ question }}</h3>
         <form action="level_result" method="post">{% csrf_token %}
-            <input type="submit" name='answer' value={{first_answer}} class="answers"/>
-            <input type="submit" name='answer' value={{second_answer}} class="answers"/>
-            <input type="submit" name='answer' value={{third_answer}} class="answers"/>
-            <input type="submit" name='answer' value={{four_answer}} class="answers"/>
+            <input type="submit" name='answer' value={{first_answer}} class="answers" id="answer1"/>
+            <input type="submit" name='answer' value={{second_answer}} class="answers" id="answer2"/>
+            <input type="submit" name='answer' value={{third_answer}} class="answers" id="answer3"/>
+            <input type="submit" name='answer' value={{four_answer}} class="answers" id="answer4"/>
         </form>
         </div>
     <div class="winnings">

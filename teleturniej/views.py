@@ -10,16 +10,11 @@ import math
 import json
 
 def get_name(request):
-    # if this is a POST request we need to process the form data
+
     if request.method == 'POST':
-        # create a form instance and populate it with data from the request:
         form = NickForm(request.POST)
-        # check whether it's valid:
+
         if form.is_valid():
-            # process the data in form.cleaned_data as required
-            # ...
-            # redirect to a new URL:
-            #request.session['nick'] = form.your_name
             nick = form.cleaned_data['your_name']
             request.session['nick'] = nick
             request.session['level'] = 1
@@ -27,8 +22,6 @@ def get_name(request):
             request.session['fifty_fifty'] = 1
             request.session['call_major'] = 1
             return HttpResponseRedirect('game')
-
-    # if a GET (or any other method) we'll create a blank form
     else:
         form = NickForm()
 
@@ -48,7 +41,8 @@ def game(request):
         question = get_object_or_404(q, pk=available_questions)
         selected_question = q.objects.get(pk=available_questions)
         available_answers = a.objects.filter(question=available_questions)
-
+        correct_answer = a.objects.filter(question_id=available_questions, is_correct_answer=1)
+        print(correct_answer)
     except (KeyError, q.DoesNotExist):
         return render(request, 'teleturniej/game.html', {
             'question': question,
@@ -60,7 +54,7 @@ def game(request):
             'nick': nick, 'question': selected_question, 'first_answer': available_answers.first(), 
             'second_answer':  available_answers[1], 'third_answer': available_answers[2], 
             'four_answer': available_answers[3], 'level': level, 'ask_chat': ask_chat, 
-            'fifty_fifty': fifty_fifty, 'call_major': call_major          
+            'fifty_fifty': fifty_fifty, 'call_major': call_major, 'correct_answer': correct_answer.first()          
         })
 
 def level_result(request):
@@ -70,7 +64,7 @@ def level_result(request):
 
     if request.method == 'POST':
         form = Answer(request.POST)
-        print(form)
+
         if form.is_valid():
             current_answer = form.cleaned_data['answer']
             check_answer = a.objects.filter(answer=current_answer, is_correct_answer=1)
@@ -85,10 +79,6 @@ def level_result(request):
         else:
             form = Answer()
 
-        return render(request, 'teleturniej/index.html', {'form': form})
-
-    if request.method == 'DELETE':
-        print('a')
         return render(request, 'teleturniej/index.html', {'form': form})
 
 def life_preserver(request):
