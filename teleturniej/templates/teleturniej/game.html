@@ -23,7 +23,7 @@
 {% load staticfiles %}
 <div class="gameContainer">
     <div class="game">
-        <img src="{% static question.image.url %}" alt="Brak zdjęcia" class="questionImage" id="image">
+        <img src="{% static question_object.image.url %}" alt="Brak zdjęcia" class="questionImage" id="image">
         <div id="plot" style="width: 98%; height: 70%; display: none"><!-- Plotly chart will be drawn inside this DIV --></div>
         {{ form }}
         <h3 class='question'>{{ question }}</h3>

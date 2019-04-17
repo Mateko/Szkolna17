@@ -20,6 +20,7 @@ $(function() {
         const answerTwo = $('#answer2').attr('value')
         const answerThree = $('#answer3').attr('value')
         const answerFour = $('#answer4').attr('value')
+        
         id = '#' + lifePreserver
 
         if (id == '#call_major') {
@@ -32,12 +33,12 @@ $(function() {
             $(id).css("background", "#DC143C")   
             const listOfAnswer = [answerOne, answerTwo, answerThree, answerFour]
             indexOfCorrectAnswer = listOfAnswer.indexOf(correctAnswer)
-           
+
             if (indexOfCorrectAnswer != -1) {
                 listOfAnswer.splice(indexOfCorrectAnswer, 1)
                 listOfAnswer.splice(1, 1);
             }
-
+            
             for (x in listOfAnswer) {
                 if (listOfAnswer[x] === answerOne) {
                     $('#answer1').css("pointer-events", "none")
