@@ -1,69 +1,21 @@
 <head>
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-{% load staticfiles %}
-<link rel="stylesheet" href="{% static 'css/game.css' %}">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>
-    $( function() {
-        $('#lifePreserver').submit(function(e){
-            e.preventDefault();
-            lifePreserver = $(this).find("input[type=submit]:focus" ).attr('id')
-            lifePreserverValue(lifePreserver);    
-        });
+    {% load staticfiles %}
 
-        function lifePreserverValue(lifePreserver) {
-            $.ajax({
-                url : "life_preserver/",
-                type: "POST",
-                data : {csrfmiddlewaretoken: document.getElementsByName('csrfmiddlewaretoken')[0].value, lifePreserver: lifePreserver},
-                dataType : "json"
-            });
-            id = '#' + lifePreserver
-            if (id == '#call_major') {
-                document.getElementById('major_pierdol_sie').play()
-                $(id).css("pointer-events","none");
-                $(id).css("background","#DC143C");
+    {% block style %}
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{% static 'css/game.css' %}">
+    {% endblock %}
 
-            } else if (id == '#fifty_fifty') {
-                $(id).css("pointer-events","none");
-                $(id).css("background","#DC143C");
-                const correctAnswer = "{{ correct_answer }}"
-                const answerOne = $('#answer1').attr('value')
-                const answerTwo = $('#answer2').attr('value')
-                const answerThree = $('#answer3').attr('value')
-                const answerFour = $('#answer4').attr('value')
-                const listOfAnswer = [answerOne, answerTwo, answerThree, answerFour]                                
-                indexOfCorrectAnswer = listOfAnswer.indexOf(correctAnswer)
-
-                if(indexOfCorrectAnswer != -1) {
-	                listOfAnswer.splice(indexOfCorrectAnswer, 1);
-                    listOfAnswer.splice(1,1);
-                }
-
-                for( x in listOfAnswer) {
-                    if(listOfAnswer[x] === answerOne) {
-                        $('#answer1').css("pointer-events","none");
-                        $('#answer1').val('')
-                    } else if (listOfAnswer[x] === answerTwo) {
-                        $('#answer2').css("pointer-events","none");
-                        $('#answer2').val('')
-                    } else if (listOfAnswer[x] === answerThree) {
-                        $('#answer3').css("pointer-events","none");
-                        $('#answer3').val('')
-                    } else if (listOfAnswer[x] === answerFour) {
-                        $('#answer4').css("pointer-events","none");
-                        $('#answer4').val('')
-                    }
-                }
-
-            } else {
-                $(id).css("pointer-events","none");
-                $(id).css("background","#DC143C");
-            }
-        };
-    });    
-</script>
+    {% block script %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        const correctAnswer = "{{ correct_answer }}"
+    </script>
+    <script type="text/javascript" src="{% static 'js/game.js' %}"></script>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    {% endblock %}
 </head>
 {% csrf_token %}
 <p class='nick'>Powodzenia {{nick}}!</p>
@@ -71,7 +23,8 @@
 {% load staticfiles %}
 <div class="gameContainer">
     <div class="game">
-        <img src="{% static question.image.url %}" alt="Brak zdjęcia" class="questionImage">
+        <img src="{% static question.image.url %}" alt="Brak zdjęcia" class="questionImage" id="image">
+        <div id="plot" style="width: 98%; height: 70%; display: none"><!-- Plotly chart will be drawn inside this DIV --></div>
         {{ form }}
         <h3 class='question'>{{ question }}</h3>
         <form action="level_result" method="post">{% csrf_token %}
@@ -89,19 +42,19 @@
             {% if ask_chat == 1 %}
                 <input type="submit" name='life_preserver' value="Zapytaj Chat" class="lifePreserverButton" id="call_chat" />
             {% else %}
-                <input type="submit" name='life_preserver' value="Zapytaj Chat" class="lifePreserverButton" disabled/>
+                <input type="submit" name='life_preserver' value="Zapytaj Chat" class="usedLifePreserverButton" disabled/>
             {% endif %}
 
             {% if fifty_fifty == 1 %}
                 <input type="submit" name='life_preserver' value="50/50" class="lifePreserverButton" id="fifty_fifty" />
             {% else %}
-                <input type="submit" name='life_preserver' value="50/50" class="lifePreserverButton" disabled/>
+                <input type="submit" name='life_preserver' value="50/50" class="usedLifePreserverButton" disabled/>
             {% endif %}
 
             {% if call_major == 1 %}
                 <input type="submit" name='life_preserver' value="Zadzwon do majora" class="lifePreserverButton" id="call_major" />
             {% else %}
-                <input type="submit" name='life_preserver' value="Zadzwon do majora" class="lifePreserverButton" disabled/>
+                <input type="submit" name='life_preserver' value="Zadzwon do majora" class="usedLifePreserverButton" disabled/>
             {% endif %}
         </form>
         <h2>Obecnie grasz o:</h2>

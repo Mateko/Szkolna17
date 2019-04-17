@@ -58,6 +58,7 @@ body {
     border: 1px solid #4D4DFE;
 }
 
+
 .question {
     text-align: center;
     border: 1px solid;
@@ -110,6 +111,17 @@ body {
     background: -ms-linear-gradient(45deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
     background: linear-gradient(45deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee', GradientType=1 );
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+}
+
+.usedLifePreserverButton {
+    width: 60%;
+    height: 4%;
+    margin-top: 3%;
+    background: #DC143C;
     border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
     -webkit-border-radius: 10px 10px 10px 10px;

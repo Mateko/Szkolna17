@@ -85,16 +85,16 @@ def life_preserver(request):
 
     if request.method == 'POST':
         form = LifePreserver(request.POST)
-
+        print(form)
    
         if form.is_valid():
             life_preserver = form.cleaned_data['life_preserver']
             request.session['%s' % life_preserver] = 0 
-            print(life_preserver)
+    
         return HttpResponse(
             json.dumps(life_preserver),
             content_type="application/json"
-        )
+        ) 
     else:
         return HttpResponse(
             json.dumps({"nothing to see": "this isn't happening"}),
