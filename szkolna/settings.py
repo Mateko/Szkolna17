@@ -20,7 +20,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mtu7qn0f2^(d^09rf(rv63ps2rf)xzmg8_s^+-+l_cmg^0$@q3'
+with open('szkolna/key.txt') as f:
+    SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -52,6 +53,8 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'szkolna.urls'
 
+ALLOWED_HOSTS = ['carthin.usermd.net', 'localhost', '127.0.0.1']
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -77,10 +80,10 @@ WSGI_APPLICATION = 'szkolna.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'szkolna17',
-        'USER': 'carthin',
-        'PASSWORD': 'masteros',
-        'HOST': '127.0.0.1',
+        'NAME': 'p14609_szkolna',
+        'USER': 'p14609_szkolna',
+        'PASSWORD': 'MLPE9k54ONcY9DLXclTA',
+        'HOST': 'pgsql2.mydevil.net',
         'PORT': '5432',
     }
 }
@@ -120,5 +123,8 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
+
+ENV_PATH = os.path.abspath(os.path.dirname(__file__))
+STATIC_ROOT = os.path.join(ENV_PATH, '../public/static/')
 
 STATIC_URL = '/static/'

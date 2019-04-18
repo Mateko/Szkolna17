@@ -8,10 +8,11 @@ body {
 
 .header {
     position: absolute;
-    color: white;               
-    top: 32%;
+    color: #8FBC8F;             
+    top: 30%;
     left: 50%;                         
-    transform: translate(-50%, -32%)
+    transform: translate(-50%, -30%);
+    text-shadow: 1px 1px 2px black;
 }
 
 .form {
@@ -19,4 +20,34 @@ body {
     top: 40%;   
     left: 50%;                     
     transform: translate(-50%, -40%)
+}
+
+.form input {
+    width: 150px;
+    height: 35px;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+}
+
+.confirmButton {
+    width: 100px;
+    height: 35px;
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+}
+
+.confirmButton:hover
+{
+    background-image:none;
+    background-color:#4D4DFE;
+    color: white;
+    
+}
+
+.form:input {
+    width:1000px;
 }
