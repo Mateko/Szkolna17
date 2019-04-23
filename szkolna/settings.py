@@ -76,13 +76,15 @@ WSGI_APPLICATION = 'szkolna.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+with open('szkolna/database.txt') as f:
+    passw =  f.read().strip()
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'p14609_szkolna',
         'USER': 'p14609_szkolna',
-        'PASSWORD': 'MLPE9k54ONcY9DLXclTA',
+        'PASSWORD': passw,
         'HOST': 'pgsql2.mydevil.net',
         'PORT': '5432',
     }
