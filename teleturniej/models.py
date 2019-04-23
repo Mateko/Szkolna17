@@ -1,7 +1,7 @@
 from __future__ import unicode_literals
 from django.db import models
 import os
-ENV_PATH = os.path.abspath(os.path.dirname(__file__))
+
 # Create your models here.
 class Question(models.Model):
     LEVELS = (
@@ -21,7 +21,7 @@ class Question(models.Model):
 
     question = models.CharField(max_length=64)
     level = models.IntegerField(choices=LEVELS)
-    image = models.ImageField(upload_to=os.path.join(ENV_PATH, '../public/static/images'))
+    image = models.ImageField(upload_to='home/carthin/domains/domain/public_python/public/static/images')
 
     def __str__(self):
         return self.question
