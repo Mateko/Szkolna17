@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+with open('szkolna/database.txt') as f:
+    passw =  f.read().strip()
 
 # Application definition
 
@@ -76,8 +78,6 @@ WSGI_APPLICATION = 'szkolna.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
-with open('szkolna/database.txt') as f:
-    passw =  f.read().strip()
 
 DATABASES = {
     'default': {
@@ -89,6 +89,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -128,5 +129,8 @@ USE_TZ = True
 
 ENV_PATH = os.path.abspath(os.path.dirname(__file__))
 STATIC_ROOT = os.path.join(ENV_PATH, '../public/static/')
+MEDIA_ROOT = os.path.join(ENV_PATH, '../public/media/') 
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+

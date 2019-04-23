@@ -19,7 +19,8 @@ def getting_question(request):
         question = get_object_or_404(q, pk=available_questions)    
         selected_question = q.objects.get(pk=available_questions).question
         available_answers = a.objects.filter(question=available_questions)
-        correct_answer = a.objects.filter(question_id=available_questions, is_correct_answer=1)[0].answer   
+        correct_answer = a.objects.filter(question_id=available_questions, is_correct_answer=1)[0].answer
+
     except (KeyError, q.DoesNotExist):
         return render(request, 'teleturniej/game.html', {
             'question': question,
@@ -74,7 +75,7 @@ def game(request):
         'second_answer':  second_answer, 'third_answer': third_answer, 
         'four_answer': four_answer, 'level': level, 'ask_chat': ask_chat, 
         'fifty_fifty': fifty_fifty, 'call_major': call_major, 'correct_answer': correct_answer,
-        'question_object': question_object         
+        'question_object': question_object        
     })
 
 def level_result(request):

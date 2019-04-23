@@ -4,6 +4,7 @@ import os
 
 # Create your models here.
 class Question(models.Model):
+  
     LEVELS = (
         (1, 'pierwszy_poziom'),
         (2, 'drugi_poziom'),
@@ -18,10 +19,10 @@ class Question(models.Model):
         (11, 'jedenasty_poziom'),
         (12, 'dwunasty_poziom'),
     )
-
+  
     question = models.CharField(max_length=64)
     level = models.IntegerField(choices=LEVELS)
-    image = models.ImageField(upload_to='home/carthin/domains/domain/public_python/public/static/images')
+    image = models.ImageField(upload_to='public/media/images')
 
     def __str__(self):
         return self.question
