@@ -7,5 +7,5 @@ django
 jquery
 
 # live preview:
-carthin.usermd.net
+carthin.usermd.net/teleturniej
 
