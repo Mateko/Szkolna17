@@ -22,7 +22,7 @@ class Question(models.Model):
   
     question = models.CharField(max_length=64)
     level = models.IntegerField(choices=LEVELS)
-    image = models.ImageField(upload_to='public/media/images')
+    image = models.ImageField(upload_to='images')
 
     def __str__(self):
         return self.question

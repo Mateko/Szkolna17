@@ -20,10 +20,10 @@
 {% csrf_token %}
 <p class='nick'>Powodzenia {{nick}}!</p>
 <!--<p>Na ten moment wygrałeś następującą ilość nitra: {{level}}</p>-->
-{% load staticfiles %}
 <div class="gameContainer">
+  {% load staticfiles %}
     <div class="game">
-        <img src=<img src="{% static question_object.image.url %}"> alt="Brak zdjęcia" class="questionImage" id="image">
+        <img src="{{ question_object.image.url }}" alt="Brak zdjęcia" class="questionImage" id="image">
         <div id="plot" style="width: 98%; height: 70%; display: none"><!-- Plotly chart will be drawn inside this DIV --></div>
         {{ form }}
         <h3 class='question'>{{ question }}</h3>
