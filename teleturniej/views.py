@@ -14,10 +14,10 @@ def getting_question(request):
     level = request.session.get('level')
 
     try:
-        random_dimension = level * 4
-        available_questions = random.randint(random_dimension -3, random_dimension)      
-        question = get_object_or_404(q, pk=available_questions)    
-        selected_question = q.objects.get(pk=available_questions).question
+        random_dimension = random.randint(0, 3)   
+        questions = q.objects.get(level=level)
+        selected_question = question[random_dimension].question
+        question = get_object_or_404(q, question=selected_question)    
         available_answers = a.objects.filter(question=available_questions)
         correct_answer = a.objects.filter(question_id=available_questions, is_correct_answer=1)[0].answer
 
