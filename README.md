@@ -2,10 +2,10 @@
 Parodia millionerów, dotycząca bohaterów ulicy szkolnej 17 w Białymstoku. W roli głównej: Krzysztof Kononowicz, Wojciech Suchodolski
 
 # Do gry zostały użyte:
-postgres
-django
-jquery
+postgreSQL
+Django
+Jquery
 
-# live preview:
+# Live preview:
 carthin.usermd.net/teleturniej
 
