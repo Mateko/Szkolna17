@@ -1,7 +1,15 @@
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-{% load staticfiles %}
-<link rel="stylesheet" href="{% static 'css/index.css' %}">
+ {% load staticfiles %}<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Witamy na szkolnej17!</title>
+  {% block script %}
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+  {% endblock %}
+</head>
 <h1 class='header'>Wprowadź swój nick</h1>
 <form action="" method="post" class='form'>
   {% csrf_token %}
